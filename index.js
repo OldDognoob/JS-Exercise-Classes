@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
   EXAMPLE TASK:
     - Write an Airplane class whose constructor initializes `name` from an argument.
@@ -41,9 +42,33 @@ class Airplane {
 */
 
 class Person {
+   constructor(name, age,) {
+     this.name = name;
+     this.age = age;
+     this.stomach = []; 
+   }
 
+   eat(someFood){
+     if(this.stomach.length < 10)
+     this.stomach.push(someFood)
+   }
+
+   poop(){
+     this.stomach = [];
+   }
+
+   toString(){
+     return`${this.name}, ${this.age}`;
+   }
 }
-
+p1 = new Person("Mary", 50);
+p1.eat("burger");
+p1.eat("fries");
+p1.eat("lasagna");
+console.log(p1);
+p1.poop();
+console.log(p1);
+console.log(p1.toString());
 /*
   TASK 2
     - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
@@ -59,8 +84,48 @@ class Person {
 */
 
 class Car {
+ constructor(model, milesPerGallon){
+   this.model = model;
+   this.milesPerGallon = milesPerGallon;
+   this.tank = 0;
+   this.odometer = 0;
+   this.canBedriven = 0;
+ }
+ fill(gallons){
+   return this.tank += gallons;
+ }
 
+  
+
+drive(distance) {
+
+if(this.tank === 0) {
+  return `I run out of fuel at ${this.odometer} miles!`;
 }
+
+this.canBedriven = this.tank / this.milesPerGallon;
+
+
+  if(this.canBedriven > distance){
+    this.tank -= distance * this.milesPerGallon;
+    // this.tank -= gallons
+    this.odometer += distance
+  }else{
+    this.odometer += this.canBedriven
+    this.tank = 0
+    return "I ran out of fuel ${this.odometer}";
+  }
+
+  
+ }
+  
+}
+
+
+// console.log(car);
+// console.log(car.fill());
+// console.log(car.drive());
+
 
 /*
   TASK 3
@@ -75,6 +140,14 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
+constructor(attributes){
+  this.name = attributes.name;
+  this.age = attributes.age;
+  this.location = attributes.location;
+}
+speak(){
+  return `Hello my name is ${this.name}, I am ${this.age} and I come from ${this.location}`;
+}
 
 }
 
@@ -92,8 +165,21 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian {
+constructor(instructorAttributes) {
+  
+        this.speciality = instractorAttributes.speciality;
+        this.favLanguage = instractorAttributes.favLanguage;
+        this.catchPhrase = instructorAttributes.catchPhrase;
+}
 
+demo(subject){
+  return `Today we are learning about ${this.subject}`;
+}
+
+grade(student, subject){
+  return ` ${this.student.name} recieves a perfect score on ${this.subject}`;
+}
 }
 
 /*
@@ -111,9 +197,27 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian {
+  constractor(studentAttributes){
+    
+       this.previousBackground = studentAttributes.previousBackground;
+       this.className = studentAttributes.className;
+       this.favSubject = studentAttributes.favSubject;
+  }
 
-}
+  listsSubjects(){
+      return 
+      } 
+  }
+  
+  PRAssignment(subject){
+      return `${this.student.name} has submitted a PR for ${this.subject}`;
+  }
+  
+  sprintChallenge(subject){
+      return `${this.student.name} has begun sprint challenge on ${this.subject}`;
+  }
+
 
 /*
   TASK 6
@@ -128,8 +232,20 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+class ProjectManager extends Instructor {
+  constructor(projectmanagerAttributes){
+      
+      this.gradClassName = projectmanagerAttributes.gradClassName;
+      this.favInstructor = projectmanagerAttributes.favInstructor;
+  }
+  
+  standUp(slackchannel){
+     return `${this.name} announces to ${this.slackchannel},standy times!`;
+  }
 
+  debugsCode(student, subject){
+    return `{this.name} debugs ${this.student.ma,e}'s code on ${this.subject}`;
+  }
 }
 
 /*
